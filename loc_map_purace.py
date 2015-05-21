@@ -63,13 +63,13 @@ labels = ['z<0.2','z<0.4','z<0.6','z<0.8','z<1.0','z<1.2']
 
 map.arcgisimage(service='World_Topo_Map', xpixels = 1500, verbose= True)
 leg = ax1.legend([d1, d2, d3, d4, d5, d6], labels, frameon= True, title='Profundidad (km)', scatterpoints = 1)
+ax1.tick_params(labelsize=20)
 
 ax2 = fig.add_subplot(212)
 ax2.plot(x,dep,'o')
 ax2.set_xlim(-76.42,-76.38)
 ax2.invert_yaxis()
-#plt.setp(ax2.get_xticklabels(), visible=False)
-#plt.axis('equal')
+ax2.tick_params(labelsize=20, bottom = False, labelbottom=False, labelright = False, right = False)
 ax2.set_aspect(0.015)
 plt.show()
 
