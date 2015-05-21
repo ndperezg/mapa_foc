@@ -22,28 +22,55 @@ for line in ordenado:
 		dep.append(0)
 	else:
 		dep.append(float(line.split(' ')[2]))
-print dep
+#print dep
+
+fig = plt.figure(figsize=(20,20))
+ax1 = fig.add_subplot(211)
 
 map = Basemap(llcrnrlon=-76.42000,llcrnrlat=2.3000,urcrnrlon=-76.38000,urcrnrlat=2.33000, projection='cyl', resolution=None)
 map.drawparallels(np.linspace(2.3, 2.33, 4), labels=[1, 1, 0, 0], fmt="%.2f", dashes=[2, 2])
 map.drawmeridians(np.linspace(-76.42, -76.38, 4), labels=[0, 0, 1, 1], fmt="%.2f", dashes=[2, 2])
 x, y = map(lon, lat)
 
+
+
 for i in range(len(dep)):
 	if dep[i] < 0.2:
-		map.scatter(x[i], y[i], 50, color="w", marker="o", edgecolor="k", zorder=50)
+		
+		d1 = map.scatter(x[i], y[i], 50, color="ivory", marker="o", edgecolor="k", zorder=50)
+
 	elif 0.2 <= dep[i] < 0.4:
-		map.scatter(x[i], y[i], 50, color="y", marker="o", edgecolor="k", zorder=50)
+		
+		d2 = map.scatter(x[i], y[i], 50, color="y", marker="o", edgecolor="k", zorder=50)
+
 	elif 0.4 <= dep[i] < 0.6:
-		map.scatter(x[i], y[i], 50, color="m", marker="o", edgecolor="k", zorder=50)	
+		
+		d3 =map.scatter(x[i], y[i], 50, color="orange", marker="o", edgecolor="k", zorder=50)
+	
 	elif 0.6 <= dep[i] < 0.8:
-		map.scatter(x[i], y[i], 50, color="g", marker="o", edgecolor="k", zorder=50)
+		
+		d4 = map.scatter(x[i], y[i], 50, color="r", marker="o", edgecolor="k", zorder=50)
+
 	elif 0.8 <= dep[i] < 1.0:
-		map.scatter(x[i], y[i], 50, color="c", marker="o", edgecolor="k", zorder=50)
+		
+		d5 = map.scatter(x[i], y[i], 50, color="aqua", marker="o", edgecolor="k", zorder=50)
+
 	elif 1.0 <= dep[i] < 1.2:
-		map.scatter(x[i], y[i], 50, color="r", marker="o", edgecolor="k", zorder=50)
+		
+		d6 = map.scatter(x[i], y[i], 50, color="g", marker="o", edgecolor="k", zorder=50)
+
+labels = ['z<0.2','z<0.4','z<0.6','z<0.8','z<1.0','z<1.2']
 
 map.arcgisimage(service='World_Topo_Map', xpixels = 1500, verbose= True)
+leg = ax1.legend([d1, d2, d3, d4, d5, d6], labels, frameon= True, title='Profundidad (km)', scatterpoints = 1)
+
+ax2 = fig.add_subplot(212)
+ax2.plot(x,dep,'o')
+ax2.set_xlim(-76.42,-76.38)
+ax2.invert_yaxis()
+#plt.setp(ax2.get_xticklabels(), visible=False)
+#plt.axis('equal')
+ax2.set_aspect(0.015)
 plt.show()
 
 
