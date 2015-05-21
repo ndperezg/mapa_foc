@@ -66,11 +66,36 @@ leg = ax1.legend([d1, d2, d3, d4, d5, d6], labels, frameon= True, title='Profund
 ax1.tick_params(labelsize=20)
 
 ax2 = fig.add_subplot(212)
-ax2.plot(x,dep,'o')
+for i in range(len(dep)):
+	if dep[i] < 0.2:
+		
+		d1 = ax2.scatter(x[i], dep[i], 50, color="ivory", marker="o", edgecolor="k", zorder=50)
+
+	elif 0.2 <= dep[i] < 0.4:
+		
+		d2 = ax2.scatter(x[i], dep[i], 50, color="y", marker="o", edgecolor="k", zorder=50)
+
+	elif 0.4 <= dep[i] < 0.6:
+		
+		d3 =ax2.scatter(x[i], dep[i], 50, color="orange", marker="o", edgecolor="k", zorder=50)
+	
+	elif 0.6 <= dep[i] < 0.8:
+		
+		d4 = ax2.scatter(x[i], dep[i], 50, color="r", marker="o", edgecolor="k", zorder=50)
+
+	elif 0.8 <= dep[i] < 1.0:
+		
+		d5 = ax2.scatter(x[i], dep[i], 50, color="aqua", marker="o", edgecolor="k", zorder=50)
+
+	elif 1.0 <= dep[i] < 1.2:
+		
+		d6 = ax2.scatter(x[i], dep[i], 50, color="g", marker="o", edgecolor="k", zorder=50)
+
 ax2.set_xlim(-76.42,-76.38)
+ax2.set_ylim(0,1.5)
 ax2.invert_yaxis()
 ax2.tick_params(labelsize=20, bottom = False, labelbottom=False, labelright = False, right = False)
-ax2.set_aspect(0.015)
+ax2.set_aspect(0.0195)
 plt.show()
 
 
